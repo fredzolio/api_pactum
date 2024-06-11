@@ -1,11 +1,11 @@
 ```markdown
 # Documentação das Rotas da API
 
-Esta documentação detalha todas as rotas disponíveis na nossa API, incluindo as operações de autenticação e gerenciamento de usuários utilizando Supabase.
+Esta documentação detalha todas as rotas disponíveis na nossa API, incluindo as operações de autenticação, gerenciamento de usuários e envio de mensagens utilizando `venom-bot` e Supabase.
 
 ## Base URL
 
-http://localhost:3333
+https://api.pactum.com.br/
 ```
 
 ## Autenticação
@@ -292,10 +292,77 @@ Authorization: Bearer jwt_token
 }
 ```
 
-## Conclusão
+## Mensagens
 
-Esta documentação cobre todas as rotas de autenticação e gerenciamento de usuários na sua API AdonisJS integrada com Supabase. Certifique-se de substituir os placeholders como `user_id` e `jwt_token` pelos valores reais ao fazer as requisições. Se precisar de mais alguma coisa, sinta-se à vontade para perguntar!
+### Enviar Mensagem
 
+**Endpoint:** `/send-message`
+
+**Método:** `POST`
+
+**Descrição:** Envia uma mensagem utilizando o `venom-bot`.
+
+**Corpo da Requisição:**
+
+```json
+{
+  "to": "5511999999999@c.us",
+  "message": "Hello, this is a test message!"
+}
 ```
 
+**Resposta de Sucesso:**
+
+```json
+{
+  "success": true,
+  "message": "Message sent successfully."
+}
 ```
+
+**Resposta de Erro:**
+
+```json
+{
+  "success": false,
+  "error": "Failed to send message."
+}
+```
+
+````typescript
+
+## Arquivo de Rotas
+
+```typescript
+/*
+|--------------------------------------------------------------------------
+| Routes file
+|--------------------------------------------------------------------------
+|
+| The routes file is used for defining the HTTP routes.
+|
+*/
+
+import Route from '@ioc:Adonis/Core/Route'
+import { middleware } from './kernel'
+
+Route.get('/', async () => {
+  return {
+    System: 'Working...',
+  }
+})
+
+Route.post('/send-message', 'VenomController.sendMessage')
+
+Route.post('register', 'AuthController.register')
+Route.post('login', 'AuthController.login')
+Route.post('logout', 'AuthController.logout').middleware('auth')
+
+Route.group(() => {
+  Route.get('users', 'UserController.index')
+  Route.get('users/:id', 'UserController.show')
+  Route.post('users', 'UserController.store')
+  Route.put('users/:id', 'UserController.update')
+  Route.delete('users/:id', 'UserController.destroy')
+}).middleware('auth')
+````
