@@ -4,7 +4,7 @@ import supabase from '#start/supabase'
 
 export default class UserController {
   async index({ response }: HttpContext) {
-    const { data, error } = await supabase.from('users').select('*')
+    const { data, error } = await supabase.from('user').select('*')
 
     if (error) {
       return response.status(500).send(error.message)
@@ -15,7 +15,7 @@ export default class UserController {
 
   async show({ params, response }: HttpContext) {
     const { id } = params
-    const { data, error } = await supabase.from('users').select('*').eq('id', id).single()
+    const { data, error } = await supabase.from('user').select('*').eq('id', id).single()
 
     if (error) {
       return response.status(500).send(error.message)
@@ -66,7 +66,7 @@ export default class UserController {
 
   async destroy({ params, response }: HttpContext) {
     const { id } = params
-    const { data, error } = await supabase.from('users').delete().eq('id', id)
+    const { data, error } = await supabase.from('user').delete().eq('id', id)
 
     if (error) {
       return response.status(500).send(error.message)

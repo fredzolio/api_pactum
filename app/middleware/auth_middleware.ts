@@ -6,17 +6,14 @@ export default class AuthMiddleware {
     const token = request.header('Authorization')?.replace('Bearer ', '')
 
     if (!token) {
-      return response.unauthorized({ message: 'Missing token' })
+      return response.unauthorized({ message: 'Não autorizado' })
     }
 
     const { data, error } = await supabase.auth.getUser(token)
 
     if (error || !data.user) {
-      return response.unauthorized({ message: 'Invalid token' })
+      return response.unauthorized({ message: 'Token inválido' })
     }
-
-    // Attach user info to request
-    //request['user'] = data.user
 
     await next()
   }

@@ -15,16 +15,17 @@ router.get('/', async () => {
     System: 'Working...',
   }
 })
-router.post('/send-message', '#controller/venoms_controller.sendMessage')
-router.post('register', '#controller/auth_controller.register')
-router.post('login', '#controller/auth_controller.login')
-router.post('logout', '#controller/auth_controller.logout').use(middleware.auth())
+router.post('/send-message', '#controllers/venoms_controller.sendMessage')
+router.post('/register', '#controllers/auth_controller.register')
+router.post('/login', '#controllers/auth_controller.login')
+router.post('/logout', '#controllers/auth_controller.logout').use(middleware.auth())
+router.get('/users', '#controllers/users_controller.index') //TEMP
 router
   .group(() => {
-    router.get('users', '#controller/users_controller.index')
-    router.get('users/:id', '#controller/users_controller.show')
-    router.post('users', '#controller/users_controller.store')
-    router.put('users/:id', '#controller/users_controller.update')
-    router.delete('users/:id', '#controller/users_controller.destroy')
+    //router.get('/users', '#controllers/users_controller.index')
+    router.get('/users/:id', '#controllers/users_controller.show')
+    router.post('/users', '#controllers/users_controller.store')
+    router.put('/users/:id', '#controllers/users_controller.update')
+    router.delete('/users/:id', '#controllers/users_controller.destroy')
   })
   .use(middleware.auth())
