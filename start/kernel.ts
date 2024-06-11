@@ -48,15 +48,15 @@ export const middleware = router.named({
 /**
  * Initialize Venom Bot Service
  */
-// import VenomService from '../app/services/venom_service.js'
+import VenomService from '../app/services/venom_service.js'
 
-// async function startVenomBot() {
-//   try {
-//     await VenomService.initialize()
-//     console.log('Venom bot started successfully.')
-//   } catch (error) {
-//     console.error('Error starting venom bot:', error)
-//   }
-// }
+async function startVenomBot() {
+  try {
+    await VenomService.initialize()
+    console.log('Venom bot started successfully.')
+  } catch (error) {
+    console.error('Error starting venom bot:', error)
+  }
+}
 
-// startVenomBot()
+startVenomBot()

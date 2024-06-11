@@ -1,5 +1,5 @@
 # Use uma imagem oficial do Node.js como base
-FROM node:18-alpine
+FROM node:latest
 
 # Crie um diretório de trabalho
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Compile o TypeScript
-RUN npm run build
+RUN node ace build
 
 # Exponha a porta da aplicação
 EXPOSE 3333
