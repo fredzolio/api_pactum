@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { HttpContext } from '@adonisjs/core/http'
 import supabase from '#start/supabase'
 
@@ -24,8 +25,16 @@ export default class UserController {
   }
 
   async store({ request, response }: HttpContext) {
-    const { name, email } = request.only(['name', 'email'])
-    const { data, error } = await supabase.from('users').insert([{ name, email }])
+    const { name, email, cel_phone, cpf, endereco } = request.only([
+      'name',
+      'email',
+      'cel_phone',
+      'cpf',
+      'endereco',
+    ])
+    const { data, error } = await supabase
+      .from('user')
+      .insert([{ name, email, cel_phone, cpf, endereco }])
 
     if (error) {
       return response.status(500).send(error.message)
@@ -36,8 +45,17 @@ export default class UserController {
 
   async update({ params, request, response }: HttpContext) {
     const { id } = params
-    const { name, email } = request.only(['name', 'email'])
-    const { data, error } = await supabase.from('users').update({ name, email }).eq('id', id)
+    const { name, email, cel_phone, cpf, endereco } = request.only([
+      'name',
+      'email',
+      'cel_phone',
+      'cpf',
+      'endereco',
+    ])
+    const { data, error } = await supabase
+      .from('user')
+      .update({ name, email, cel_phone, cpf, endereco })
+      .eq('id', id)
 
     if (error) {
       return response.status(500).send(error.message)

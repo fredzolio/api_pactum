@@ -3,7 +3,15 @@ import { HttpContext } from '@adonisjs/core/http'
 
 export default class AuthController {
   async register({ request, response }: HttpContext) {
-    const { email, password } = request.only(['email', 'password'])
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const { email, password, name, cel_phone, cpf, endereco } = request.only([
+      'email',
+      'password',
+      'name',
+      'cel_phone',
+      'cpf',
+      'endereco',
+    ])
 
     const authResponse = await supabase.auth.signUp({ email, password })
 
@@ -11,7 +19,15 @@ export default class AuthController {
       return response.badRequest(authResponse.error.message)
     }
 
-    return response.created({ authResponse })
+    const { data, error: dbError } = await supabase
+      .from('user')
+      .insert([{ email, name, cel_phone, cpf, endereco }])
+
+    if (dbError) {
+      return response.badRequest(dbError.message)
+    }
+
+    return response.created({ user: data, authResponse })
   }
 
   async login({ request, response }: HttpContext) {

@@ -22,9 +22,11 @@ https://api.pactum.com.br/
 
 ```json
 {
-  "email": "user@example.com",
-  "password": "password",
-  "name": "John Doe"
+  "user": {
+    "id": "user_id",
+    "email": "user@example.com",
+    "name": "John Doe"
+  }
 }
 ```
 
@@ -134,7 +136,10 @@ Authorization: Bearer jwt_token
   {
     "id": "user_id",
     "email": "user@example.com",
-    "name": "John Doe"
+    "name": "John Doe",
+    "cel_phone": "1234567890",
+    "cpf": "123.456.789-00",
+    "endereco": "Rua Exemplo, 123"
   },
   ...
 ]
@@ -168,7 +173,10 @@ Authorization: Bearer jwt_token
 {
   "id": "user_id",
   "email": "user@example.com",
-  "name": "John Doe"
+  "name": "John Doe",
+  "cel_phone": "1234567890",
+  "cpf": "123.456.789-00",
+  "endereco": "Rua Exemplo, 123"
 }
 ```
 
@@ -199,7 +207,10 @@ Authorization: Bearer jwt_token
 ```json
 {
   "email": "user@example.com",
-  "name": "John Doe"
+  "name": "John Doe",
+  "cel_phone": "1234567890",
+  "cpf": "123.456.789-00",
+  "endereco": "Rua Exemplo, 123"
 }
 ```
 
@@ -209,7 +220,10 @@ Authorization: Bearer jwt_token
 {
   "id": "user_id",
   "email": "user@example.com",
-  "name": "John Doe"
+  "name": "John Doe",
+  "cel_phone": "1234567890",
+  "cpf": "123.456.789-00",
+  "endereco": "Rua Exemplo, 123"
 }
 ```
 
@@ -240,7 +254,10 @@ Authorization: Bearer jwt_token
 ```json
 {
   "email": "user@example.com",
-  "name": "John Doe"
+  "name": "John Doe",
+  "cel_phone": "1234567890",
+  "cpf": "123.456.789-00",
+  "endereco": "Rua Exemplo, 123"
 }
 ```
 
@@ -250,7 +267,10 @@ Authorization: Bearer jwt_token
 {
   "id": "user_id",
   "email": "user@example.com",
-  "name": "John Doe"
+  "name": "John Doe",
+  "cel_phone": "1234567890",
+  "cpf": "123.456.789-00",
+  "endereco": "Rua Exemplo, 123"
 }
 ```
 
