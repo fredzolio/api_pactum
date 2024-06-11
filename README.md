@@ -4,11 +4,9 @@
 Esta documentação detalha todas as rotas disponíveis na nossa API, incluindo as operações de autenticação e gerenciamento de usuários utilizando Supabase.
 
 ## Base URL
-```
 
 http://localhost:3333
-
-````
+```
 
 ## Autenticação
 
@@ -21,13 +19,14 @@ http://localhost:3333
 **Descrição:** Registra um novo usuário no sistema.
 
 **Corpo da Requisição:**
+
 ```json
 {
   "email": "user@example.com",
   "password": "password",
   "name": "John Doe"
 }
-````
+```
 
 **Resposta de Sucesso:**
 
