@@ -6,7 +6,7 @@ class VenomService {
 
   async initialize() {
     this.client = await create({
-      session: 'pactum-session', // Change 'session-name' if you want to manage multiple sessions
+      session: 'pactum-session',
     })
 
     this.client.onMessage(this.handleMessage.bind(this))
@@ -20,7 +20,7 @@ class VenomService {
       }
 
       try {
-        await axios.post('http://your-webhook-url.com/webhook', payload)
+        await axios.post('https://hook.us1.make.com/c5su6k4tvum97qf39hvidmvw23jyhx68', payload)
       } catch (error) {
         console.error('Error sending message to webhook:', error)
       }

@@ -14,8 +14,12 @@ export default class UserController {
   }
 
   async show({ params, response }: HttpContext) {
-    const { id } = params
-    const { data, error } = await supabase.from('user').select('*').eq('id', id).single()
+    const { cel_phone } = params
+    const { data, error } = await supabase
+      .from('user')
+      .select('*')
+      .eq('cel_phone', cel_phone)
+      .single()
 
     if (error) {
       return response.status(500).send(error.message)
@@ -32,6 +36,7 @@ export default class UserController {
       'cpf',
       'endereco',
     ])
+
     const { data, error } = await supabase
       .from('user')
       .insert([{ name, email, cel_phone, cpf, endereco }])
@@ -44,18 +49,26 @@ export default class UserController {
   }
 
   async update({ params, request, response }: HttpContext) {
-    const { id } = params
-    const { name, email, cel_phone, cpf, endereco } = request.only([
+    const { cel_phone } = params
+    const { name, email, cpf, endereco, thread_id } = request.only([
       'name',
       'email',
-      'cel_phone',
       'cpf',
       'endereco',
+      'thread_id',
     ])
+
+    const updatedData: any = {}
+    if (name) updatedData.name = name
+    if (email) updatedData.email = email
+    if (cpf) updatedData.cpf = cpf
+    if (endereco) updatedData.endereco = endereco
+    if (thread_id) updatedData.thread_id = thread_id
+
     const { data, error } = await supabase
       .from('user')
-      .update({ name, email, cel_phone, cpf, endereco })
-      .eq('id', id)
+      .update(updatedData)
+      .eq('cel_phone', cel_phone)
 
     if (error) {
       return response.status(500).send(error.message)
@@ -65,8 +78,8 @@ export default class UserController {
   }
 
   async destroy({ params, response }: HttpContext) {
-    const { id } = params
-    const { data, error } = await supabase.from('user').delete().eq('id', id)
+    const { cel_phone } = params
+    const { data, error } = await supabase.from('user').delete().eq('cel_phone', cel_phone)
 
     if (error) {
       return response.status(500).send(error.message)
